@@ -1,13 +1,25 @@
 class Solution {
 public:
-    /*
-     * param k : description of k
-     * param nums : description of array and index 0 ~ n-1
-     * return: description of return
-     */
-    int kLargest(vector<int>)
-    int kthLargestElement(int k, vector<int> nums) {
-        // write your code here
+    int partition(vector<int>& nums, int left, int right) {
+        int pivot = nums[left];
+        int l = left + 1, r = right;
+        while (l <= r) {
+            if (nums[l] < pivot && nums[r] > pivot)
+                swap(nums[l++], nums[r--]);
+            if (nums[l] >= pivot) l++;
+            if (nums[r] <= pivot) r--;
+        }
+        swap(nums[left], nums[r]);
+        return r;
+    }
 
+    int kthLargestElement(int k, vector<int> nums) {
+        int left = 0, right = nums.size() - 1;
+        while (true) {
+            int pos = partition(nums, left, right);
+            if (pos == k - 1) return nums[pos];
+            if (pos > k - 1) right = pos - 1;
+            else left = pos + 1;
+        }
     }
 };
