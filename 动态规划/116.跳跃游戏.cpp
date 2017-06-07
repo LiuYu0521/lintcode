@@ -1,3 +1,27 @@
+// class Solution {
+// public:
+//     /**
+//      * @param A: A list of integers
+//      * @return: The boolean answer
+//      */
+//     bool canJump(vector<int> A) {
+//         // write you code here
+//         int len = A.size();
+//         if(len == 1)
+//             return true;
+//         int dp[len];
+//         dp[0] = A[0];
+//         for(int i = 1; i < len; i++)
+//         {
+//             if(dp[i - 1] >= i)
+//                 dp[i] = max(dp[i - 1], i + A[i]);
+//             else
+//                 dp[i] = 0;
+//         }
+//         return dp[len - 1] >= len - 1;
+//     }
+// };
+
 class Solution {
 public:
     /**
@@ -7,14 +31,15 @@ public:
     bool canJump(vector<int> A) {
         // write you code here
         int len = A.size();
-        if(len == 0 || len == 1)
-            return true;
-        bool dp[len];
-        dp[0] = true;
+        int currtMaxStep = A[0];
         for(int i = 1; i < len; i++)
         {
-            dp[i] = dp[i - 1] && (A[i - 1] >= i);
+            if(i > currtMaxStep)
+                return false;
+            currtMaxStep = max(currtMaxStep, i + A[i]);
+            if(currtMaxStep >= len - 1)
+                return true;
         }
-        return dp[len - 1];
+        return currtMaxStep >= len - 1;
     }
 };
