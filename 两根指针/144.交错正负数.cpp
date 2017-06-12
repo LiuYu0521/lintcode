@@ -6,5 +6,6 @@ public:
      */
     void rerange(vector<int> &A) {
         // write your code here
+        int len = A.size();
     }
 };
