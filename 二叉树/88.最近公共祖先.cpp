@@ -22,7 +22,11 @@ public:
         if(!root || A == root || B == root)
             return root;
         TreeNode* left = lowestCommonAncestor(root->left, A, B);
+        if(left && left != A && left != B)
+            return left;
         TreeNode* right = lowestCommonAncestor(root->right, A, B);
+        if(right && right != A && right != B)
+            return right;
         if(left && right)
             return root;
         return left ? left : right;
