@@ -21,5 +21,12 @@ public:
      */
     int query(SegmentTreeNode *root, int start, int end) {
         // write your code here
+        if(!root)
+            return 0;
+        if(root->end < start || root->start > end)
+            return 0;
+        if(root->start >= start && root->end <= end)
+            return root->count;
+        return query(root->left, start, end) + query(root->right, start, end);
     }
 };
