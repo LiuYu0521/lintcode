@@ -21,6 +21,10 @@ public:
         // write your code here
         if(!root || A == root || B == root)
             return root;
-
+        TreeNode* left = lowestCommonAncestor(root->left, A, B);
+        TreeNode* right = lowestCommonAncestor(root->right, A, B);
+        if(left && right)
+            return root;
+        return left ? left : right;
     }
 };
