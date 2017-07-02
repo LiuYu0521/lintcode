@@ -7,20 +7,27 @@ public:
      */
     int nthSuperUglyNumber(int n, vector<int>& primes) {
         // Write your code here
-        int res = 0;
-        int count = 0;
-        while(count != n)
+        vector<int> res(1, 1);
+        vector<int> idx(primes.size(), 0);
+        while(res.size() < n)
         {
-            res++;
-            int temp = res;
+            vector<int> temp;
+            int mn = INT_MAX;
             for(int i = 0; i < primes.size(); i++)
             {
-                while(temp % primes[i] == 0)
-                    temp = temp / primes[i];
+                temp.push_back(res[idx[i]] * primes[i]);
             }
-            if(temp == 1)
-                count++;
+            for(int i = 0; i < primes.size(); i++)
+            {
+                mn = min(mn, temp[i]);
+            }
+            for(int i = 0; i < primes.size(); i++)
+            {
+                if(mn == temp[i])
+                    idx[i]++;
+            }
+            res.push_back(mn);
         }
-        return res;
+        return res.back();
     }
 };
