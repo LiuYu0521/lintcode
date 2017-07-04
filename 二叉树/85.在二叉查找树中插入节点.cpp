@@ -17,6 +17,7 @@ public:
      * @param node: insert this node into the binary search tree
      * @return: The root of the new binary search tree.
      */
+
     TreeNode* insertNode(TreeNode* root, TreeNode* node) {
         // write your code here
         if(!root)
