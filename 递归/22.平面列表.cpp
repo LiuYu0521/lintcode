@@ -24,5 +24,20 @@ public:
     // @return a list of integer
     vector<int> flatten(vector<NestedInteger> &nestedList) {
         // Write your code here
+        vector<int> result;
+        for (auto ele : nestedList)
+        {
+            if (ele.isInteger())
+                result.push_back(ele.getInteger());
+            else
+            {
+                vector<NestedInteger> sub_list = ele.getList();
+                vector<int> temp = flatten(sub_list);
+                result.insert(result.end(), temp.begin(), temp.end());
+            }
+
+        }
+        return result;
+
     }
 };
