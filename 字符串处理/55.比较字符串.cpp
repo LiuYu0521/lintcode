@@ -8,5 +8,18 @@ public:
      */
     bool compareStrings(string A, string B) {
         // write your code here
+        int letter[26]={0};
+        for(auto c : A)
+        {
+            letter[c - 'A']++;
+        }
+        for(auto c : B)
+        {
+            if(letter[c - 'A'] == 0)
+                return false;
+            else
+                letter[c - 'A']--;
+        }
+        return true;
     }
 };
