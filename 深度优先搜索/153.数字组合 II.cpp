@@ -8,32 +8,27 @@ public:
     vector<vector<int> > combinationSum2(vector<int> &num, int target) {
         // write your code here
         vector<vector<int>> res;
-        int len = num.size();
-        if(len == 0)
-            return res;
         sort(num.begin(), num.end());
         vector<int> out;
-        int sum = 0;
-        helper(0, sum, target, out, num, res);
+        helper(num, target, 0, out, res);
         return res;
     }
-    void helper(int k, int sum, int &target, vector<int> out, vector<int> &num, vector<vector<int>> &res)
+    void helper(vector<int> &num, int target, int start, vector<int> out, vector<vector<int>> &res)
     {
-        if(k == num.size())
-        {
+        if(target < 0)
             return;
-        }
+        else if(target == 0)
+            res.push_back(out);
         else
         {
-            helper(k + 1, sum, target, out, num, res);
-            sum = sum + num[k];
-            out.push_back(num[k]);
-            if(sum == target)
+            for(int i = start; i < num.size(); i++)
             {
-                res.push_back(out);
+                if(i > start && num[i] == num[i - 1])
+                    continue;
+                out.push_back(num[i]);
+                helper(num, target - num[i], i + 1, out, res);
+                out.pop_back();
             }
-            else
-                helper(k + 1, sum, target, out, num, res);
         }
     }
 };
