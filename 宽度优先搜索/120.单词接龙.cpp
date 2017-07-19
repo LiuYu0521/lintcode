@@ -14,12 +14,10 @@ public:
         if (n < 1 || n != end.size()) {
             return 0;
         }
-
         queue<string> Q;
         Q.push(start);
         dict.erase(start);
         int length = 2;
-
         while (!Q.empty()) {
             int size = Q.size();
             for (int i = 0; i < size; i++) {
